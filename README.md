@@ -23,6 +23,26 @@ Use of [Scala IDE](http://scala-ide.org/) is recommended
 2. sbt compile
 3. sbt eclipse // If using Eclipse.
 4. sbt run
+5. 
+
+### Configuration
+
+By default, TextTeaser uses MongoDB to record keywords, categories and some article types.
+To disable this, set `dummyKeywordService` to `false` in the `GuiceModule` used to configure the summarizer, e.g.
+
+    val config = new Config
+    val guice = new ScalaInjector(
+      Guice.createInjector(
+          new GuiceModule(
+              config,
+              dummyKeywordService=true
+          )
+      )
+    )
+    
+    val summarizer = guice.instance[Summarizer]
+    ...
+
 
 ### Todo and issues
 
